@@ -1,10 +1,6 @@
 import InstructionsBar from './InstructionsBar';
 import { renderWithProviders } from '../../utils/test';
-import { Simulate } from 'react-dom/test-utils';
-import { fireEvent, getByText } from '@testing-library/react';
-import React from 'react';
-import { Button } from '@mui/material';
-
+import { fireEvent, render } from '@testing-library/react';
 describe('InstructionsBar', () => {
   const defaultProps = {
     onClick: jest.fn(),
@@ -18,13 +14,12 @@ describe('InstructionsBar', () => {
   });
 
   // TODO: Challenge 3
+
   it('should call the onClick prop when the button is clicked', () => {
-    const getByText = renderWithProviders(
-      <InstructionsBar {...defaultProps} />
+    const buttonClick = renderWithProviders(
+      <InstructionsBar {...defaultProps}>View challenges</InstructionsBar>
     );
-
-    getByText.container.onclick;
-
-    expect(getByText).toBeCalled();
+    fireEvent.click(buttonClick.getByText('View challenges'));
+    expect(defaultProps.onClick).toHaveBeenCalled();
   });
 });

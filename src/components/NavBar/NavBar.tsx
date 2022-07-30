@@ -27,6 +27,20 @@ function NavBar({ links }: TNavBar) {
       }
     };
 
+  // method runs on loads whatever /href you are on should highlight the nav
+  window.onload = () => {
+    const url = 'http://localhost:3000';
+    var hrefUrl: string = '';
+    var checkHref: any = '';
+    document.querySelectorAll('.nav-page-current').forEach((element) => {
+      checkHref = element.getAttribute('href');
+      hrefUrl = url + checkHref;
+      if (hrefUrl == window.location.href) {
+        element.setAttribute('aria-current', 'page');
+      }
+    });
+  };
+
   return (
     <Box
       component="aside"

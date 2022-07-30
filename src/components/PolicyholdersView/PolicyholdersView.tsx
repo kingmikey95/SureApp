@@ -10,59 +10,64 @@ import Paper from '@mui/material/Paper';
 import Button from '@mui/material/Button';
 import Box from '@mui/material/Box';
 import { PolicyHoldersInfo } from './PolicyHolderInterface';
-import { Icon, Typography } from '@mui/material';
+import { Typography } from '@mui/material';
+import Challenge9ThingsIdDo from './Challenge9ThingsIdDo';
+import { PostPolicyHoldersInfo } from './PolicyPostReponseInterface';
+import axios from 'axios';
 
 function PolicyholdersView() {
-  var dataInfo: any[] = [];
-
   const [data, getData] = useState<PolicyHoldersInfo[]>([]);
-  const GET_POLICY_URL =
+  const [postData, getPostData] = useState<PostPolicyHoldersInfo[]>([]);
+  //const POST_ADD_POLICTY_URL = 'https://fe-interview-technical-challenge-api-git-main-sure.vercel.app/api/policyholders';
+  const API_URL =
     'https://fe-interview-technical-challenge-api-git-main-sure.vercel.app/api/policyholders';
 
-  const POST_ADD_POLICTY_URL =
-    'https://fe-interview-technical-challenge-api-git-main-sure.vercel.app/api/policyholders';
   const fetchGetPolicyData = () => {
-    fetch(GET_POLICY_URL, {
-      method: 'GET',
-    })
-      .then((res) => res.json())
+    //fetching the get url policy to display data
+    axios
+      .get(API_URL)
+      .then((res) => res.data)
       .then((response) => {
         getData(response.policyHolders);
-        for (var i in response.policyHolders) {
-          dataInfo.push(response.policyHolders[i]);
-        }
-        console.log('the data info is in the arrayt', dataInfo);
       });
   };
 
   useEffect(() => {
+    // calls the get fetch on load
     fetchGetPolicyData();
   }, []);
-
-  const OnClickAddPolicy = () => {
-    useEffect(() => {
-      fetch(POST_ADD_POLICTY_URL, {
-        method: 'POST',
+  //Onclick functionality will call the api with a post request then table will update.
+  const OnClickUpdateTable = () => {
+    axios
+      .post(
+        'https://fe-interview-technical-challenge-api-git-main-sure.vercel.app/api/policyholders',
+        {
+          body: JSON.stringify(postData),
+        }
+      )
+      .then((res) => res.data.policyHolders)
+      .then((response) => {
+        console.log(response);
+        getPostData(response.policyHolders);
+        console.log(response.policyHolders);
       })
-        .then((res) => res.json())
-        .then((response) => {
-          getData(response.policyHolders);
-        });
-    }, []);
+      .catch((error) => {
+        console.log('This is an error in the updating table', error);
+      });
   };
 
   return (
     <Box>
       <TableContainer component={Paper}>
-        <Table sx={{ minWidth: 650 }} aria-label="simple table">
+        <Table sx={{ minWidth: 700 }} aria-label="simple table">
           <TableHead>
             <TableRow>
               <TableCell>Policy Holders#</TableCell>
-              <TableCell align="right">Name</TableCell>
-              <TableCell align="right">Age</TableCell>
-              <TableCell align="right">Address</TableCell>
-              <TableCell align="right">Phone Number</TableCell>
-              <TableCell align="right">Primay</TableCell>
+              <TableCell align="center">Name</TableCell>
+              <TableCell align="center">Age</TableCell>
+              <TableCell align="center">Address</TableCell>
+              <TableCell align="center">Phone Number</TableCell>
+              <TableCell align="center">Primay</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
@@ -72,21 +77,27 @@ function PolicyholdersView() {
                 sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
               >
                 <TableCell component="th" scope="row">
-                  {i}
+                  <b>{i + 1}</b>
                 </TableCell>
                 <TableCell component="th" scope="row">
                   {policyHolders.name}
                 </TableCell>
                 <TableCell align="right">{policyHolders.age}</TableCell>
                 <TableCell align="right">
-                  {policyHolders.address.line1}
-                  {policyHolders.address.line2}
-                  {policyHolders.address.state}
-                  {policyHolders.address.city}
-                  {policyHolders.address.postalCode}
+                  <b>Line 1</b> : {policyHolders.address.line1}
+                  <br></br>
+                  <b>Line 2</b> : {policyHolders.address.line2}
+                  <br></br>
+                  <b>State</b> : {policyHolders.address.state}
+                  <br></br>
+                  <b>City</b> : {policyHolders.address.city}
+                  <br></br>
+                  <b>Postal Code</b> : {policyHolders.address.postalCode}
                 </TableCell>
                 <TableCell align="right">{policyHolders.phoneNumber}</TableCell>
-                <TableCell align="right">{policyHolders.isPrimary}</TableCell>
+                <TableCell align="right">
+                  {policyHolders.isPrimary ? 'True' : 'False'}
+                </TableCell>
               </TableRow>
             ))}
           </TableBody>
@@ -97,10 +108,75 @@ function PolicyholdersView() {
           mt: '2em',
         }}
       >
-        <Button onClick={OnClickAddPolicy} variant="contained">
+        <Button onClick={OnClickUpdateTable} variant="contained">
           Add a Policyholder
         </Button>
       </Typography>
+      <Typography
+        id="post-data-table"
+        sx={{
+          mt: '15px',
+        }}
+      >
+        <TableContainer component={Paper}>
+          <Table sx={{ minWidth: 700 }} aria-label="simple table">
+            <TableHead>
+              <TableRow>
+                <TableCell>Policy Holders#</TableCell>
+                <TableCell align="center">Name</TableCell>
+                <TableCell align="center">Age</TableCell>
+                <TableCell align="center">Address</TableCell>
+                <TableCell align="center">Phone Number</TableCell>
+                <TableCell align="center">Primay</TableCell>
+              </TableRow>
+            </TableHead>
+            <TableBody>
+              {postData.map((policyHolders, i) => (
+                <TableRow
+                  key={i}
+                  sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
+                >
+                  <TableCell component="th" scope="row">
+                    {i}
+                  </TableCell>
+                  <TableCell component="th" scope="row">
+                    {policyHolders.policyHolders[i].name}
+                  </TableCell>
+                  <TableCell align="right">
+                    {policyHolders.policyHolders[i].age}
+                  </TableCell>
+                  <TableCell align="right">
+                    <label>Line 1</label>-
+                    {policyHolders.policyHolders[i].address.line1}
+                    <br></br>
+                    <label>Line 2</label>-
+                    {policyHolders.policyHolders[i].address.line2}
+                    <br></br>
+                    <label>State</label>-
+                    {policyHolders.policyHolders[i].address.state}
+                    <br></br>
+                    <label>City</label>-
+                    {policyHolders.policyHolders[i].address.city}
+                    <br></br>
+                    <label>Postal Code</label>-
+                    {policyHolders.policyHolders[i].address.postalCode}
+                  </TableCell>
+                  <TableCell align="right">
+                    {policyHolders.policyHolders[i].phoneNumber}
+                  </TableCell>
+                  <TableCell align="right">
+                    {policyHolders.policyHolders[i].isPrimary
+                      ? 'True'
+                      : 'False'}
+                  </TableCell>
+                </TableRow>
+              ))}
+            </TableBody>
+          </Table>
+        </TableContainer>
+      </Typography>
+
+      <Challenge9ThingsIdDo />
     </Box>
   );
 }
