@@ -7,7 +7,7 @@ import Layout from './components/Layout';
 import { useState } from 'react';
 import Modal from './components/Modal';
 import Instructions from './components/Instructions';
-import PolicyholdersView from './components/PolicyholdersView/PolicyholdersView';
+
 function App() {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
@@ -16,7 +16,6 @@ function App() {
       <Layout onFooterClick={() => setIsModalOpen(true)}>
         <Routes>
           <Route path="/" element={<HomeView />} />
-          <Route path="/policyholders" element={<PolicyholdersView />} />
           <Route path="/table" element={<TableDemoView />} />
           <Route path="/you-can-do-it" element={<YouCanDoItView />} />
           <Route path="*" element={<RedirectView />} />
