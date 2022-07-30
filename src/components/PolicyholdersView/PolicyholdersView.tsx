@@ -72,6 +72,9 @@ function PolicyholdersView() {
                 sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
               >
                 <TableCell component="th" scope="row">
+                  {i}
+                </TableCell>
+                <TableCell component="th" scope="row">
                   {policyHolders.name}
                 </TableCell>
                 <TableCell align="right">{policyHolders.age}</TableCell>
