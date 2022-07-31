@@ -1,5 +1,8 @@
+import { CurrencyYenTwoTone, WindowSharp } from '@mui/icons-material';
 import { Link, Box } from '@mui/material';
+import React, { HtmlHTMLAttributes } from 'react';
 import { Link as RouterLink } from 'react-router-dom';
+import './NavBarStyle.css';
 type TNavBar = {
   links: {
     text: string;
@@ -49,6 +52,7 @@ function NavBar({ links }: TNavBar) {
         display: 'flex',
         flexDirection: 'column',
         alignItems: 'center',
+        height: '100vh',
       }}
     >
       <Link
@@ -61,6 +65,8 @@ function NavBar({ links }: TNavBar) {
 
       {links.map(({ text, href, 'data-testid': dataTestId }) => (
         <Link
+          onClick={handleClick(href)}
+          className="nav-page-current"
           component={RouterLink}
           key={href}
           to={href}
