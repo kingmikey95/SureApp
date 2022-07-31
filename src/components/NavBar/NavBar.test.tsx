@@ -1,6 +1,5 @@
 import NavBar from './NavBar';
 import { renderWithProviders } from '../../utils/test';
-import { getByTestId } from '@testing-library/react';
 
 describe('NavBar', () => {
   const defaultProps = {
