@@ -14,7 +14,7 @@ const card = (
       I have many things to work on. With that being said. If this product was
       going to go out production. I would most definitely clean up the styling a
       little bit making it more eye appealing to the users. I would give an
-      option of the user to create their own policy holder by using a modal
+      option to the user to create their own policy holder by using a modal
       after clicking “Add a Policyholder” after creating the table would refresh
       so the user could see the update. Maybe give permissions to certain users
       to Add a Policy, depending what the customer would want with it. Would

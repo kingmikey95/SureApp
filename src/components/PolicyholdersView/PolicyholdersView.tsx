@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
@@ -12,13 +12,11 @@ import Box from '@mui/material/Box';
 import { PolicyHoldersInfo } from './PolicyHolderInterface';
 import { Typography } from '@mui/material';
 import Challenge9ThingsIdDo from './Challenge9ThingsIdDo';
-import { PostPolicyHoldersInfo } from './PolicyPostReponseInterface';
 import axios from 'axios';
-
+//import './TableStyle.css';
 function PolicyholdersView() {
   const [data, getData] = useState<PolicyHoldersInfo[]>([]);
-  const [postData, getPostData] = useState<PostPolicyHoldersInfo[]>([]);
-  //const POST_ADD_POLICTY_URL = 'https://fe-interview-technical-challenge-api-git-main-sure.vercel.app/api/policyholders';
+  const [postData, getPostData] = useState<PolicyHoldersInfo[]>([]);
   const API_URL =
     'https://fe-interview-technical-challenge-api-git-main-sure.vercel.app/api/policyholders';
 
@@ -36,20 +34,32 @@ function PolicyholdersView() {
     // calls the get fetch on load
     fetchGetPolicyData();
   }, []);
+
   //Onclick functionality will call the api with a post request then table will update.
   const OnClickUpdateTable = () => {
     axios
       .post(
         'https://fe-interview-technical-challenge-api-git-main-sure.vercel.app/api/policyholders',
         {
-          body: JSON.stringify(postData),
+          name: 'mikeyu',
+          age: '66',
+          address: {
+            line1: '42 yeet yet',
+            line2: '42 null',
+            city: 'savannah',
+            state: 'ga',
+            postalCode: '31323',
+          },
+          phoneNumber: '912-313-5314',
+          isPrimary: 'false',
         }
       )
-      .then((res) => res.data.policyHolders)
+
+      .then((res) => res.data)
       .then((response) => {
-        console.log(response);
         getPostData(response.policyHolders);
-        console.log(response.policyHolders);
+        const table = document.getElementById('post-data-table');
+        table?.setAttribute('style', 'display:block');
       })
       .catch((error) => {
         console.log('This is an error in the updating table', error);
@@ -83,7 +93,7 @@ function PolicyholdersView() {
                   {policyHolders.name}
                 </TableCell>
                 <TableCell align="right">{policyHolders.age}</TableCell>
-                <TableCell align="right">
+                <TableCell align="center">
                   <b>Line 1</b> : {policyHolders.address.line1}
                   <br></br>
                   <b>Line 2</b> : {policyHolders.address.line2}
@@ -116,6 +126,7 @@ function PolicyholdersView() {
         id="post-data-table"
         sx={{
           mt: '15px',
+          display: 'none',
         }}
       >
         <TableContainer component={Paper}>
@@ -137,37 +148,28 @@ function PolicyholdersView() {
                   sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
                 >
                   <TableCell component="th" scope="row">
-                    {i}
+                    <b>{i + 1}</b>
                   </TableCell>
                   <TableCell component="th" scope="row">
-                    {policyHolders.policyHolders[i].name}
+                    {policyHolders.name}
+                  </TableCell>
+                  <TableCell align="right">{policyHolders.age}</TableCell>
+                  <TableCell align="center">
+                    <b>Line 1</b> : {policyHolders.address.line1}
+                    <br></br>
+                    <b>Line 2</b> : {policyHolders.address.line2}
+                    <br></br>
+                    <b>State</b> : {policyHolders.address.state}
+                    <br></br>
+                    <b>City</b> : {policyHolders.address.city}
+                    <br></br>
+                    <b>Postal Code</b> : {policyHolders.address.postalCode}
                   </TableCell>
                   <TableCell align="right">
-                    {policyHolders.policyHolders[i].age}
+                    {policyHolders.phoneNumber}
                   </TableCell>
                   <TableCell align="right">
-                    <label>Line 1</label>-
-                    {policyHolders.policyHolders[i].address.line1}
-                    <br></br>
-                    <label>Line 2</label>-
-                    {policyHolders.policyHolders[i].address.line2}
-                    <br></br>
-                    <label>State</label>-
-                    {policyHolders.policyHolders[i].address.state}
-                    <br></br>
-                    <label>City</label>-
-                    {policyHolders.policyHolders[i].address.city}
-                    <br></br>
-                    <label>Postal Code</label>-
-                    {policyHolders.policyHolders[i].address.postalCode}
-                  </TableCell>
-                  <TableCell align="right">
-                    {policyHolders.policyHolders[i].phoneNumber}
-                  </TableCell>
-                  <TableCell align="right">
-                    {policyHolders.policyHolders[i].isPrimary
-                      ? 'True'
-                      : 'False'}
+                    {policyHolders.isPrimary ? 'True' : 'False'}
                   </TableCell>
                 </TableRow>
               ))}
