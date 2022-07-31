@@ -4,7 +4,6 @@ import NavBar from '../NavBar';
 import { Box } from '@mui/material';
 import links from '../../constants/links';
 import InstructionsBar from '../InstructionsBar';
-import './LayoutStyle.css';
 
 type TLayout = PropsWithChildren<{
   onFooterClick: () => void;
@@ -25,7 +24,6 @@ function Layout({ children, onFooterClick }: TLayout) {
             margin: '0 auto',
             maxWidth: '750px',
             padding: '48px 16px',
-            pb: '95px',
           }}
         >
           {children}

@@ -34,4 +34,5 @@ describe('NavBar', () => {
     expect(getByText('Link2').getAttribute('href')).not.toBe('/link1');
     expect(getByText('Link3').getAttribute('href')).not.toBe('/link2');
   });
+  it('should render an `href` attribute for each link', () => {});
 });
