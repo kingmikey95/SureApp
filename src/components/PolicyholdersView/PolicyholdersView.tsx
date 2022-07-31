@@ -27,6 +27,9 @@ function PolicyholdersView() {
       .then((res) => res.data)
       .then((response) => {
         getData(response.policyHolders);
+      })
+      .catch((error) => {
+        console.log('This is an error in the get table', error);
       });
   };
 
@@ -58,7 +61,7 @@ function PolicyholdersView() {
       .then((res) => res.data)
       .then((response) => {
         getPostData(response.policyHolders);
-        const table = document.getElementById('post-data-table');
+        const table = document.getElementById('post-data-table'); //will display the table into a block since it is being hidden
         table?.setAttribute('style', 'display:block');
       })
       .catch((error) => {

@@ -19,6 +19,7 @@ function NavBar({ links }: TNavBar) {
       var links = document.getElementsByClassName('nav-page-current');
 
       for (var i = 0; i < links.length; i++) {
+        //loops to every link to set the attribute if it is being clicked on equal to the href
         if (href == links[i].getAttribute('href')) {
           links[i].setAttribute('aria-current', 'page');
         } else {
