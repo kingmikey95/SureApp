@@ -22,7 +22,6 @@ describe('NavBar', () => {
   //Unit test checking for thge good case.
   it('should render an `href` attribute for each link', () => {
     const { getByText } = renderWithProviders(<NavBar {...defaultProps} />);
-
     expect(getByText('Link1').getAttribute('href')).toBe('/link1');
     expect(getByText('Link2').getAttribute('href')).toBe('/link2');
     expect(getByText('Link3').getAttribute('href')).toBe('/link3');
@@ -31,7 +30,6 @@ describe('NavBar', () => {
   //Unit test is checking for the bad case.
   it('should render an `href` attribute for each link but not equal to the link', () => {
     const { getByText } = renderWithProviders(<NavBar {...defaultProps} />);
-
     expect(getByText('Link1').getAttribute('href')).not.toBe('/link3');
     expect(getByText('Link2').getAttribute('href')).not.toBe('/link1');
     expect(getByText('Link3').getAttribute('href')).not.toBe('/link2');
