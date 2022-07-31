@@ -19,8 +19,10 @@ const card = (
       so the user could see the update. Maybe give permissions to certain users
       to Add a Policy, depending what the customer would want with it. Would
       think about the future to add pagination of some short to the table just
-      in case it does get big. I would definitely ask peers or people on what I
-      could do better and learn from it. That is pretty much all I can think of.
+      in case it does get big. Would also display data for the insurance policy
+      so the policy holder could see that data. I would definitely ask peers or
+      nUsers on what I could do better to make the Website more appealing and
+      efficient and learn from it. That is pretty much all I can think of.
       <br />
     </Typography>
   </CardContent>
