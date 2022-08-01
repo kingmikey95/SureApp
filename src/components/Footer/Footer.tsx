@@ -19,11 +19,15 @@ function Footer() {
       component="footer"
       textAlign={{ xs: 'center', sm: 'unset' }}
       sx={{
-        background: 'rgba(170,186,205,.2)',
-        padding: '16px',
+        mh: '15vh',
+        position: 'absolute',
+        bottom: '0',
+        width: '100%',
+        padding: '20px',
+        color: 'ddd',
       }}
     >
-      <Grid container justifyContent="space-around">
+      <Grid container justifyContent="space-around" mt={5}>
         <Grid item xs={12} sm={2}>
           <Box sx={{ display: 'block' }}>
             <img src="/surefooterlogo.svg" alt="sure logo" />

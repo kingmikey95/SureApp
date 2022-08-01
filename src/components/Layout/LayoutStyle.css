@@ -1,0 +1,29 @@
+
+  body {
+    background-color: #f1f1f1;
+    position: relative;
+    padding-bottom: 58px;
+    min-height: 100vh;
+  }
+  
+  main{
+    min-height: 84vh;
+    margin: 0 0 100px;
+  }
+
+
+  footer {
+    min-height: 25vh;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    text-align: center;
+    padding: 20px;
+    background-color: #ddd;
+
+  }
+  
+
+  main{
+    margin-bottom:10em;
+  }
