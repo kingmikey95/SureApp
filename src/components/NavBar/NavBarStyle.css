@@ -1,0 +1,4 @@
+[aria-current][aria-current="page"] {
+    text-decoration: underline yellowgreen;
+    text-underline-offset: .1rem;
+}   

@@ -1,6 +1,6 @@
 import { Link, Box } from '@mui/material';
-import { Link as RouterLink } from 'react-router-dom';
-import {useState} from 'react';
+import { Link as RouterLink, useLocation } from 'react-router-dom';
+import './NavBarStyle.css';
 type TNavBar = {
   links: {
     text: string;
@@ -9,14 +9,8 @@ type TNavBar = {
   }[];
 };
 
-
-
 function NavBar({ links }: TNavBar) {
-
-  const [isCurrent, setCurrent] = useState(false);
-
-  const handleClick = () => 
-
+  const location = useLocation();
   return (
     <Box
       component="aside"
@@ -44,6 +38,7 @@ function NavBar({ links }: TNavBar) {
           to={href}
           color="#fff"
           underline="hover"
+          aria-current={location.pathname === href ? 'page' : undefined}
           sx={{
             cursor: 'pointer',
             '&:not(:last-of-type)': {
