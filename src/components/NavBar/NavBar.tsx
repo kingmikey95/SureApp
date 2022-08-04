@@ -1,5 +1,6 @@
 import { Link, Box } from '@mui/material';
 import { Link as RouterLink } from 'react-router-dom';
+import {useState} from 'react';
 type TNavBar = {
   links: {
     text: string;
@@ -8,7 +9,14 @@ type TNavBar = {
   }[];
 };
 
+
+
 function NavBar({ links }: TNavBar) {
+
+  const [isCurrent, setCurrent] = useState(false);
+
+  const handleClick = () => 
+
   return (
     <Box
       component="aside"
