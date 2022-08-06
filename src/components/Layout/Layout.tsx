@@ -16,6 +16,11 @@ function Layout({ children, onFooterClick }: TLayout) {
         component="main"
         sx={{
           display: 'flex',
+          position: 'relative',
+          zIndex: '3',
+          flex: '1',
+          overflow: 'hidden',
+          minHeight: '100vh',
         }}
       >
         <NavBar links={links} />

@@ -21,6 +21,7 @@ function NavBar({ links }: TNavBar) {
         display: 'flex',
         flexDirection: 'column',
         alignItems: 'center',
+        position: 'relative',
       }}
     >
       <Link
