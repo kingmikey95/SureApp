@@ -18,10 +18,9 @@ function NavBar({ links }: TNavBar) {
         background: '#0c2975',
         padding: '16px',
         width: '200px',
-        display: 'flex',
         flexDirection: 'column',
         alignItems: 'center',
-        position: 'relative',
+        display: 'flex',
       }}
     >
       <Link
